@@ -9,7 +9,7 @@ const HomePage = () => {
     { title: 'People', icon: '/Face.png', route: '/faces' },
     { title: 'To-Do List', icon: '/list.png', route: '/todo' },
     { title: 'Medications', icon: '/medication.png', route: '/medications' },
-    { title: 'Schedule', icon: '/schedule.png', route: '/schedule' },
+
     { title: 'Important Facts', icon: '/facts.png', route: '/facts' },
   ];
 

@@ -1,0 +1,284 @@
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #3b82f6;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .category-grid, .fact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+  }
+  
+  .category-card, .fact-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    position: relative;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .category-card:hover, .fact-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .card-header {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+  
+  
+  .category-name {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .fact-count {
+    color: #6b7280;
+  }
+  
+  .view-facts-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .view-facts-button:hover {
+    background-color: #2563eb;
+  }
+  
+  .add-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+  }
+  
+  .add-button:hover {
+    background-color: #2563eb;
+  }
+  
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .modal {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .modal-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .modal-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+  }
+  
+  .modal-buttons {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .modal-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .modal-button.cancel {
+    background-color: #9ca3af;
+    color: white;
+    margin-right: 10px;
+  }
+  
+  .modal-button.cancel:hover {
+    background-color: #6b7280;
+  }
+  
+  .modal-button.add {
+    background-color: #3b82f6;
+    color: white;
+  }
+  
+  .modal-button.add:hover {
+    background-color: #2563eb;
+  }
+  
+  .back-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .back-button:hover {
+    background-color: #2563eb;
+  }
+  
+  .fact-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-bottom: 10px;
+  }
+  
+  .fact-text {
+    color: #1f2937;
+  }
+  
+  .edit-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+  }
+  
+  .save-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .save-button:hover {
+    background-color: #2563eb;
+  }
+  
+  .error {
+    color: #dc2626;
+  }
+  
+  .error-message {
+    text-align: center;
+    color: #4b5563;
+  }
+  
+  button {
+    background: none;
+    border: none;
+  }
+  
+  /* The "..." button */
+  .options-button {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #6b7280;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  
+  /* Change the "..." button to white when hovered */
+  .options-button:hover {
+    color: white;
+  }
+  
+  .options-dropdown {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background-color: #f3f4f6; /* Gray background when not hovered */
+    border-radius: 8px;         /* Rounded edges */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    transition: background-color 0.3s ease; /* Smooth transition for hover */
+    width: 200px; /* Set a fixed width to make the box longer */
+  }
+  
+  /* Dropdown container turns blue when hovered */
+  .options-dropdown:hover {
+    background-color: #3b82f6; /* Blue background on hover */
+  }
+  
+  /* Dropdown button items */
+  .option-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Add smooth color transition */
+    color: #3b82f6; /* Default blue color */
+  }
+  
+  /* Both items change to white when the dropdown is hovered */
+  .options-dropdown:hover .option-item {
+    color: white; /* Turn text white when hovering over either item or container */
+  }
+  
+  /* Optional: slight hover effect for individual items */
+  .option-item:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Slight hover effect for better visibility */
+  }
+  
+  /* Icons inside dropdown */
+  .option-icon {
+    width: 15px;
+    height: 15px;
+    margin-right: 10px;
+  }
