@@ -6,33 +6,33 @@ const OptionsMenu = ({ onEdit, onDelete }) => {
 
   return (
     <div className="relative">
-      <button
-        className="options-button focus:outline-none"
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        ...
-      </button>
+  <button
+  className="text-gray-500 hover:text-gray-700 text-2xl font-bold focus:outline-none bg-transparent"
+  onClick={() => setIsOpen(!isOpen)}
+>
+  ...
+</button>
       {isOpen && (
-        <div className="options-dropdown">
+        <div className="absolute right-0 mt-2 w-48 bg-gray-100 rounded-md shadow-lg z-10">
           <button
-            className="option-item"
+            className="w-full text-left px-4 py-2 hover:bg-gray-200 flex items-center"
             onClick={() => {
               onEdit();
               setIsOpen(false);
             }}
           >
-            <img src="/pencil.png" alt="Edit" className="option-icon" />
+            <img src="/edit.png" alt="Edit" className="w-4 h-4 mr-2" />
             Edit
           </button>
           <button
-            className="option-item"
+            className="w-full text-left px-4 py-2 hover:bg-gray-200 flex items-center"
             onClick={() => {
               onDelete();
               setIsOpen(false);
             }}
           >
-            <img src="/delete.png" alt="Delete" className="option-icon" />
-            <span className="delete-text">Delete</span>
+            <img src="/delete.png" alt="Delete" className="w-4 h-4 mr-2" />
+            <span className="text-red-500">Delete</span>
           </button>
         </div>
       )}
