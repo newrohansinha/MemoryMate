@@ -11,6 +11,7 @@ const HomePage = () => {
     { title: 'Medications', icon: '/medication.png', route: '/medications' },
 
     { title: 'Important Facts', icon: '/facts.png', route: '/facts' },
+    { title: 'Practice', icon: '/practice.png', route: '/practice' },
   ];
 
   return (

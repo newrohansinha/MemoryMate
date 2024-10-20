@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import NavBar from './components/Navbar';
+import PracticePage from './pages/PracticePage';
 
 // Import all page components
 import HomePage from './pages/HomePage';
@@ -46,6 +47,8 @@ const App = () => {
             } />
             <Route path="/faces" element={<ProtectedRoute><FacesPage /></ProtectedRoute>} />
             <Route path="/facts" element={<ProtectedRoute><FactsPage /></ProtectedRoute>} />
+         <Route path="/practice" element={<PracticePage />} />
+
             <Route path="/category/:categoryId" element={<ProtectedRoute><CategoryPage /></ProtectedRoute>} />
             <Route path="/todo" element={<ProtectedRoute><ToDoPage /></ProtectedRoute>} />
             <Route path="/medications" element={<ProtectedRoute><MedicationsPage /></ProtectedRoute>} />
