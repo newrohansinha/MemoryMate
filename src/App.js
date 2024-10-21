@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import NavBar from './components/Navbar';
 import PracticePage from './pages/PracticePage';
+import PracticeReminderPage from './pages/PracticeReminderPage'; // Import the Practice Reminder page
 
 // Import all page components
 import HomePage from './pages/HomePage';
@@ -42,13 +43,11 @@ const App = () => {
           
           <Routes>
             <Route path="/signup" element={<SignupPage />} />
-            <Route path="/" element={
-              user ? <HomePage /> : <Navigate to="/signup" replace />
-            } />
+            <Route path="/" element={user ? <HomePage /> : <Navigate to="/signup" replace />} />
             <Route path="/faces" element={<ProtectedRoute><FacesPage /></ProtectedRoute>} />
             <Route path="/facts" element={<ProtectedRoute><FactsPage /></ProtectedRoute>} />
-         <Route path="/practice" element={<PracticePage />} />
-
+            <Route path="/practice" element={<ProtectedRoute><PracticePage /></ProtectedRoute>} /> {/* Practice Page */}
+            <Route path="/practice-reminder" element={<ProtectedRoute><PracticeReminderPage /></ProtectedRoute>} /> {/* Practice Reminder Page */}
             <Route path="/category/:categoryId" element={<ProtectedRoute><CategoryPage /></ProtectedRoute>} />
             <Route path="/todo" element={<ProtectedRoute><ToDoPage /></ProtectedRoute>} />
             <Route path="/medications" element={<ProtectedRoute><MedicationsPage /></ProtectedRoute>} />

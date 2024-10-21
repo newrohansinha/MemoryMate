@@ -7,12 +7,14 @@ const FacesPage = () => {
   const [isAdding, setIsAdding] = useState(false);
 
   const handleAddFace = () => {
-    if (newFace.name && newFace.description) {
+    if (newFace.name && newFace.description && newFace.image) {
       const updatedFaces = [...faces, { ...newFace, id: Date.now() }];
       setFaces(updatedFaces);
       localStorage.setItem('faces', JSON.stringify(updatedFaces));
       setNewFace({ name: '', description: '', image: '' });
       setIsAdding(false);
+    } else {
+      alert("Please provide all required details.");
     }
   };
 
@@ -20,6 +22,17 @@ const FacesPage = () => {
     const updatedFaces = faces.filter(face => face.id !== id);
     setFaces(updatedFaces);
     localStorage.setItem('faces', JSON.stringify(updatedFaces));
+  };
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setNewFace((prevState) => ({ ...prevState, image: reader.result }));
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   return (
@@ -74,10 +87,10 @@ const FacesPage = () => {
               className="input"
             />
             <input
-              type="text"
-              placeholder="Image URL (optional)"
-              value={newFace.image}
-              onChange={(e) => setNewFace({ ...newFace, image: e.target.value })}
+              type="file"
+              accept="image/*"
+              capture="environment"
+              onChange={handleImageChange}
               className="input"
             />
             <div className="button-group">

@@ -1,0 +1,223 @@
+/* Container for the entire page */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  /* Title styling */
+  .title {
+    font-size: 2rem;
+    color: #3b82f6;
+    margin-bottom: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  /* Grid for displaying reminders */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    position: relative;
+  }
+  
+  /* Empty state message */
+  .empty-state {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #9CA3AF;
+    font-size: 2rem;
+    font-weight: bold;
+    width: 100%;
+  }
+  
+  /* Individual reminder card */
+  .reminder-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    position: relative;
+    transition: transform 0.2s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .reminder-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  /* Delete button for each reminder */
+  .delete-button {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #9ca3af;
+    cursor: pointer;
+    transition: color 0.2s ease-in-out;
+  }
+  
+  .delete-button:hover {
+    color: #ef4444;
+  }
+  
+  /* Time and day information for each reminder */
+  .reminder-time {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #374151; /* Dark Gray */
+  }
+  
+  .reminder-days {
+    color: #6b7280; /* Lighter Gray */
+    text-align: center;
+  }
+  
+  /* Add button styling */
+  .add-button {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #3b82f6;
+    color: white;
+    font-size: 2rem;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.2s ease-in-out;
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .add-button:hover {
+    background-color: #2563eb;
+  }
+  
+  /* Modal overlay */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  /* Modal content */
+  .modal {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .modal-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  /* Input field styling */
+  .input {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+  }
+  
+  /* Day selection buttons styling */
+  .day-button {
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    background-color: #e5e7eb;
+    color: #374151;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  .day-button.active {
+    background-color: #3b82f6;
+    color: white;
+  }
+  
+  .day-button:hover {
+    background-color: #2563eb;
+    color: white;
+  }
+  
+  /* Button group styling for actions */
+  .button-group {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+  }
+  
+  /* General button styling */
+  .button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  .button.primary {
+    background-color: #3b82f6;
+    color: white;
+  }
+  
+  .button.primary:hover {
+    background-color: #2563eb;
+  }
+  
+  .button.secondary {
+    background-color: #e5e7eb;
+    color: #374151;
+  }
+  
+  .button.secondary:hover {
+    background-color: #d1d5db;
+  }
+  
+  /* Responsive design for smaller screens */
+  @media (max-width: 640px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  
+    .reminder-card {
+      margin-bottom: 15px;
+    }
+  
+    .add-button {
+      bottom: 1rem;
+      right: 1rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .modal {
+      padding: 1.5rem;
+      max-width: calc(100% - 40px);
+    }
+  }
+  

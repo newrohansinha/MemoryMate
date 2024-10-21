@@ -10,8 +10,10 @@ const HomePage = () => {
     { title: 'To-Do List', icon: '/list.png', route: '/todo' },
     { title: 'Medications', icon: '/medication.png', route: '/medications' },
 
-    { title: 'Important Facts', icon: '/facts.png', route: '/facts' },
+    { title: <span>Important<br />Facts</span>, icon: '/facts.png', route: '/facts' },
+
     { title: 'Practice', icon: '/practice.png', route: '/practice' },
+    { title: <span>Practice<br />Reminders</span>, icon: '/schedule.png', route: '/practice-reminder' },
   ];
 
   return (

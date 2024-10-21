@@ -31,7 +31,8 @@ const Navbar = () => {
             <Link to="/medications" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Medications</Link>
             <Link to="/ai-assistant" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">AI Assistant</Link>
             <Link to="/emergency-contact" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Emergency Contact</Link>
-            <Link to="/practice" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Practice</Link>
+            <Link to="/practice" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Practice</Link> {/* Practice Page */}
+            <Link to="/practice-reminder" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Practice Reminder</Link> {/* Practice Reminder Page */}
           </div>
         )}
       </div>
