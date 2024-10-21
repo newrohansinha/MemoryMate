@@ -8,7 +8,7 @@
   font-size: 2rem;
   color: #3b82f6;
   margin-bottom: 1.5rem;
-  
+  font-weight: bold;
   text-align: center;
 }
 
@@ -97,6 +97,10 @@
   cursor: pointer;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: background-color 0.2s ease-in-out;
+
+  display: flex; /* Use Flexbox */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
 }
 
 .add-button:hover {

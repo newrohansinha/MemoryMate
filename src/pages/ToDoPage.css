@@ -40,7 +40,18 @@
     cursor: pointer;
     transition: color 0.2s ease-in-out;
   }
+  .time-picker-container {
+    margin-bottom: 15px;
+  }
   
+  .time-picker-container label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .time-picker {
+    width: 100%;
+  }
   .delete-button:hover {
     color: #ef4444;
   }

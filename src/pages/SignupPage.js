@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { GoogleLogin } from '@react-oauth/google';
-import { jwtDecode } from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode'; // Corrected import here
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../App'; // Make sure this path is correct
 
@@ -16,6 +16,7 @@ const SignupPage = () => {
       const userInfo = jwtDecode(response.credential);
       setUser(userInfo);
       localStorage.setItem('user', JSON.stringify(userInfo));
+      console.log("Google sign-up email:", userInfo.email); // Print user's email from Google
       navigate('/');
     } catch (error) {
       console.error("Error decoding token:", error);
@@ -30,11 +31,10 @@ const SignupPage = () => {
 
   const handleEmailSignup = (e) => {
     e.preventDefault();
-    // Here you would typically send a request to your backend to create a new user
-    // For now, we'll just simulate a successful signup
     const userInfo = { email, name: email.split('@')[0] };
     setUser(userInfo);
     localStorage.setItem('user', JSON.stringify(userInfo));
+    console.log("Email sign-up email:", userInfo.email); // Print user's email from email signup
     navigate('/');
   };
 
