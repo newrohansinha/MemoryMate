@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useCallback } from 'react';
 import { AuthContext } from '../App'; // Adjust this import path if needed
 import emailjs from 'emailjs-com';
 
@@ -9,8 +9,13 @@ const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 const MedicationsPage = () => {
   const { user } = useContext(AuthContext);
   const [medications, setMedications] = useState(() => {
-    const storedMeds = JSON.parse(localStorage.getItem('medications')) || [];
-    return storedMeds.map(med => ({ ...med, taken: false })); // Reset taken status on page load
+    try {
+      const storedMeds = JSON.parse(localStorage.getItem('medications')) || [];
+      return storedMeds.map(med => ({ ...med, taken: false }));
+    } catch (error) {
+      console.error("Error parsing medications from localStorage:", error);
+      return [];
+    }
   });
   const [newMed, setNewMed] = useState({ name: '', dose: '', time: '', days: [], taken: false });
   const [isAdding, setIsAdding] = useState(false);
@@ -31,78 +36,19 @@ const MedicationsPage = () => {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('medications', JSON.stringify(medications));
+    try {
+      localStorage.setItem('medications', JSON.stringify(medications));
+    } catch (error) {
+      console.error("Error saving medications to localStorage:", error);
+    }
   }, [medications]);
 
-  // Schedule reminders for all medications on component load
-  useEffect(() => {
-    medications.forEach(med => scheduleReminder(med));
-  }, [medications]);
-
-  const handleAddMed = () => {
-    if (newMed.name && newMed.dose && newMed.time && newMed.days.length > 0) {
-      const updatedMeds = [...medications, { ...newMed, id: Date.now() }];
-      setMedications(updatedMeds);
-      setNewMed({ name: '', dose: '', time: '', days: [], taken: false });
-      setIsAdding(false);
-      scheduleReminder(newMed); // Schedule a reminder for the new medication
-    } else {
-      alert("Please fill out all fields and select at least one day.");
+  const sendEmailReminder = useCallback((med) => {
+    if (!user || !user.email) {
+      console.error("User information is not available");
+      return;
     }
-  };
 
-  const handleToggleTaken = (id) => {
-    setMedications(medications.map((med) =>
-      med.id === id ? { ...med, taken: !med.taken } : med
-    ));
-  };
-
-  const handleDeleteMed = (id) => {
-    setMedications(medications.filter(med => med.id !== id));
-  };
-
-  // Handle selecting days of the week
-  const handleDaySelect = (day) => {
-    if (newMed.days.includes(day)) {
-      setNewMed({ ...newMed, days: newMed.days.filter(d => d !== day) });
-    } else {
-      setNewMed({ ...newMed, days: [...newMed.days, day] });
-    }
-  };
-
-  // Handle "Every day" selection
-  const handleEveryDaySelect = () => {
-    if (newMed.days.includes("Every day")) {
-      setNewMed({ ...newMed, days: [] });
-    } else {
-      setNewMed({ ...newMed, days: ["Every day"] });
-    }
-  };
-
-  // Function to schedule a reminder for a specific medication
-  const scheduleReminder = (med) => {
-    const now = new Date();
-    const currentDay = now.toLocaleDateString('en-US', { weekday: 'short' }); // Get current day (Mon, Tue, etc.)
-    const [hours, minutes] = med.time.split(':');
-    const reminderTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), hours, minutes);
-
-    const timeUntilReminder = reminderTime.getTime() - now.getTime();
-
-    if ((med.days.includes(currentDay) || med.days.includes("Every day")) && timeUntilReminder > 0) {
-      // Schedule the reminder for the current day if time is still in the future
-      setTimeout(() => sendEmailReminder(med), timeUntilReminder);
-      console.log(`Reminder scheduled for ${reminderTime.toLocaleString()} (in ${timeUntilReminder / 60000} minutes)`);
-    } else if (timeUntilReminder <= 0 && (med.days.includes(currentDay) || med.days.includes("Every day"))) {
-      // If the time has already passed, send the reminder immediately
-      console.log(`Time has passed for ${med.name}. Sending reminder immediately.`);
-      sendEmailReminder(med);
-    } else {
-      console.log(`Reminder not scheduled for ${med.name} today.`);
-    }
-  };
-
-  // Function to send an email reminder
-  const sendEmailReminder = (med) => {
     console.log("Sending medication reminder for:", med.name);
     const emailParams = {
       to_name: user.name || user.email.split('@')[0],
@@ -120,7 +66,79 @@ const MedicationsPage = () => {
       .catch(err => {
         console.error('Failed to send email:', err);
       });
+  }, [user]);
+
+  const scheduleReminder = useCallback((med) => {
+    if (!med || !med.days || !Array.isArray(med.days)) {
+      console.error("Invalid medication data:", med);
+      return;
+    }
+
+    const now = new Date();
+    const currentDay = now.toLocaleDateString('en-US', { weekday: 'short' });
+    const [hours, minutes] = (med.time || '').split(':');
+    const reminderTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), hours, minutes);
+
+    const timeUntilReminder = reminderTime.getTime() - now.getTime();
+
+    if ((med.days.includes(currentDay) || med.days.includes("Every day")) && timeUntilReminder > 0) {
+      setTimeout(() => sendEmailReminder(med), timeUntilReminder);
+      console.log(`Reminder scheduled for ${reminderTime.toLocaleString()} (in ${timeUntilReminder / 60000} minutes)`);
+    } else if (timeUntilReminder <= 0 && (med.days.includes(currentDay) || med.days.includes("Every day"))) {
+      console.log(`Time has passed for ${med.name}. Sending reminder immediately.`);
+      sendEmailReminder(med);
+    } else {
+      console.log(`Reminder not scheduled for ${med.name} today.`);
+    }
+  }, [sendEmailReminder]);
+
+  useEffect(() => {
+    if (Array.isArray(medications)) {
+      medications.forEach(med => scheduleReminder(med));
+    }
+  }, [medications, scheduleReminder]);
+
+  const handleAddMed = () => {
+    if (newMed.name && newMed.dose && newMed.time && newMed.days && newMed.days.length > 0) {
+      const updatedMeds = [...medications, { ...newMed, id: Date.now() }];
+      setMedications(updatedMeds);
+      setNewMed({ name: '', dose: '', time: '', days: [], taken: false });
+      setIsAdding(false);
+      scheduleReminder(newMed);
+    } else {
+      alert("Please fill out all fields and select at least one day.");
+    }
   };
+
+  const handleToggleTaken = (id) => {
+    setMedications(medications.map((med) =>
+      med.id === id ? { ...med, taken: !med.taken } : med
+    ));
+  };
+
+  const handleDeleteMed = (id) => {
+    setMedications(medications.filter(med => med.id !== id));
+  };
+
+  const handleDaySelect = (day) => {
+    if (newMed.days.includes(day)) {
+      setNewMed({ ...newMed, days: newMed.days.filter(d => d !== day) });
+    } else {
+      setNewMed({ ...newMed, days: [...newMed.days, day] });
+    }
+  };
+
+  const handleEveryDaySelect = () => {
+    if (newMed.days.includes("Every day")) {
+      setNewMed({ ...newMed, days: [] });
+    } else {
+      setNewMed({ ...newMed, days: ["Every day"] });
+    }
+  };
+
+  if (!user) {
+    return <div>Loading user data...</div>;
+  }
 
   return (
     <div className="container mx-auto py-8 px-4">
@@ -144,7 +162,7 @@ const MedicationsPage = () => {
               <h3 className="font-bold text-lg mb-2">{med.name}</h3>
               <p className="text-gray-600 mb-1">Dose: {med.dose}</p>
               <p className="text-gray-600 mb-2">Time: {med.time}</p>
-              <p className="text-gray-600 mb-2">Days: {med.days.includes("Every day") ? "Every day" : med.days.join(", ")}</p>
+              <p className="text-gray-600 mb-2">Days: {med.days && med.days.includes("Every day") ? "Every day" : med.days && med.days.join(", ")}</p>
               <button
                 className={`w-full py-2 rounded-md ${
                   med.taken ? 'bg-green-500 hover:bg-green-600' : 'bg-blue-500 hover:bg-blue-600'
