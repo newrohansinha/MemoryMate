@@ -47,6 +47,13 @@ const AIChatPage = () => {
       medsString += `- ${med.name}, Dose: ${med.dose}, Time: ${med.time}\n`;
     });
 
+    // Retrieve Faces from localStorage
+    const faces = JSON.parse(localStorage.getItem('faces')) || [];
+    let facesString = "Here are the people you need to remember: \n";
+    faces.forEach(face => {
+      facesString += `- ${face.name}: ${face.description}\n`;
+    });
+
     // Concatenate all data into one string
     const combinedData = `
     Here is all the information you have stored in the app:
@@ -56,6 +63,8 @@ const AIChatPage = () => {
     ${factsString}
 
     ${medsString}
+
+    ${facesString}
 
     Answer the question using the information provided above.
     `;
