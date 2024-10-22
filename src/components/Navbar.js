@@ -9,12 +9,18 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-blue-500 py-2 px-4 flex justify-between items-center">
-      <div className="w-6"> {/* Placeholder to balance the layout */}
+    <nav className="bg-blue-500 py-2 px-4 flex justify-between items-center relative">
+      {/* Placeholder to keep layout balanced */}
+      <div className="w-6"></div>
+
+      {/* Home Button */}
+      <div className="absolute inset-x-0 flex justify-center">
+        <Link to="/" className="text-white">
+          <img src={`${process.env.PUBLIC_URL}/home.png`} alt="Home" className="w-6 h-6" />
+        </Link>
       </div>
-      <Link to="/" className="text-white flex items-center justify-center">
-        <img src={`${process.env.PUBLIC_URL}/home.png`} alt="Home" className="w-5 h-5" />
-      </Link>
+
+      {/* Dropdown Menu */}
       <div className="relative">
         <button
           onClick={toggleDropdown}
@@ -31,8 +37,9 @@ const Navbar = () => {
             <Link to="/medications" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Medications</Link>
             <Link to="/ai-assistant" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">AI Assistant</Link>
             <Link to="/emergency-contact" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Emergency Contact</Link>
-            <Link to="/practice" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Practice</Link> {/* Practice Page */}
-            <Link to="/practice-reminder" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Practice Reminder</Link> {/* Practice Reminder Page */}
+            <Link to="/practice" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Practice</Link>
+            <Link to="/practice-reminder" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Practice Reminder</Link>
+            <Link to="/ai-chat" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">AI Chat</Link> {/* AI Chat Page */}
           </div>
         )}
       </div>

@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import NavBar from './components/Navbar';
-import PracticePage from './pages/PracticePage';
-import PracticeReminderPage from './pages/PracticeReminderPage'; // Import the Practice Reminder page
+import AIChatPage from './pages/AIChatPage'; // Import the AI Chat Page
 
 // Import all page components
 import HomePage from './pages/HomePage';
@@ -11,7 +10,8 @@ import FacesPage from './pages/FacesPage';
 import FactsPage, { CategoryPage } from './pages/FactsPage';
 import ToDoPage from './pages/ToDoPage';
 import MedicationsPage from './pages/MedicationsPage';
-import AiAssistantPage from './pages/AiAssistantPage';
+import PracticePage from './pages/PracticePage'; // Import Practice Page
+import PracticeReminderPage from './pages/PracticeReminderPage'; // Import Practice Reminder Page
 import EmergencyContactPage from './pages/EmergencyContactPage';
 import SignupPage from './pages/SignupPage';
 
@@ -36,22 +36,22 @@ const App = () => {
   };
 
   return (
-    <GoogleOAuthProvider clientId="1064795131152-iv0f3ai8gv0rncaj4ou1jecurih2pqg6.apps.googleusercontent.com">
+    <GoogleOAuthProvider clientId="1064795131152-iv0f3ai8gv0rncaj4ou1jecurih2pqg6.apps.googleusercontent.com"> {/* Replace with your actual Client ID */}
       <AuthContext.Provider value={{ user, setUser }}>
         <div className="min-h-screen bg-gray-100">
-          {user && <NavBar />}
+          {user && <NavBar />} {/* Show NavBar only if user is logged in */}
           
           <Routes>
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/" element={user ? <HomePage /> : <Navigate to="/signup" replace />} />
             <Route path="/faces" element={<ProtectedRoute><FacesPage /></ProtectedRoute>} />
             <Route path="/facts" element={<ProtectedRoute><FactsPage /></ProtectedRoute>} />
-            <Route path="/practice" element={<ProtectedRoute><PracticePage /></ProtectedRoute>} /> {/* Practice Page */}
-            <Route path="/practice-reminder" element={<ProtectedRoute><PracticeReminderPage /></ProtectedRoute>} /> {/* Practice Reminder Page */}
+            <Route path="/ai-chat" element={<ProtectedRoute><AIChatPage /></ProtectedRoute>} /> {/* AI Chat Page */}
             <Route path="/category/:categoryId" element={<ProtectedRoute><CategoryPage /></ProtectedRoute>} />
             <Route path="/todo" element={<ProtectedRoute><ToDoPage /></ProtectedRoute>} />
             <Route path="/medications" element={<ProtectedRoute><MedicationsPage /></ProtectedRoute>} />
-            <Route path="/ai-assistant" element={<ProtectedRoute><AiAssistantPage /></ProtectedRoute>} />
+            <Route path="/practice" element={<ProtectedRoute><PracticePage /></ProtectedRoute>} /> {/* Practice Page */}
+            <Route path="/practice-reminder" element={<ProtectedRoute><PracticeReminderPage /></ProtectedRoute>} /> {/* Practice Reminder Page */}
             <Route path="/emergency-contact" element={<ProtectedRoute><EmergencyContactPage /></ProtectedRoute>} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>

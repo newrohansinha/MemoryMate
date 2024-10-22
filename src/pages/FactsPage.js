@@ -6,12 +6,12 @@ const OptionsMenu = ({ onEdit, onDelete }) => {
 
   return (
     <div className="relative">
-  <button
-  className="text-gray-500 hover:text-gray-700 text-2xl font-bold focus:outline-none bg-transparent"
-  onClick={() => setIsOpen(!isOpen)}
->
-  ...
-</button>
+      <button
+        className="text-gray-500 hover:text-gray-700 text-2xl font-bold focus:outline-none bg-transparent"
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        ...
+      </button>
       {isOpen && (
         <div className="absolute right-0 mt-2 w-48 bg-gray-100 rounded-md shadow-lg z-10">
           <button
@@ -39,6 +39,7 @@ const OptionsMenu = ({ onEdit, onDelete }) => {
     </div>
   );
 };
+
 const FactsPage = () => {
   const [categories, setCategories] = useState(() => JSON.parse(localStorage.getItem('factCategories')) || []);
   const [newCategory, setNewCategory] = useState('');
@@ -154,7 +155,7 @@ const FactsPage = () => {
 const CategoryPage = () => {
   const { categoryId } = useParams();
   const [categories, setCategories] = useState(() => JSON.parse(localStorage.getItem('factCategories')) || []);
-  const [newFact, setNewFact] = useState({ text: '', imageUrl: '' });
+  const [newFact, setNewFact] = useState({ text: '', imageFile: null });
   const [isAddingFact, setIsAddingFact] = useState(false);
   const [editingFact, setEditingFact] = useState(null);
   const navigate = useNavigate();
@@ -167,16 +168,41 @@ const CategoryPage = () => {
 
   const handleAddFact = () => {
     if (newFact.text.trim()) {
-      const updatedCategories = categories.map(c => {
-        if (c.id === parseInt(categoryId)) {
-          return { ...c, facts: [...c.facts, { id: Date.now(), ...newFact }] };
-        }
-        return c;
-      });
-      setCategories(updatedCategories);
-      setNewFact({ text: '', imageUrl: '' });
-      setIsAddingFact(false);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const updatedCategories = categories.map(c => {
+          if (c.id === parseInt(categoryId)) {
+            return { ...c, facts: [...c.facts, { id: Date.now(), text: newFact.text, imageUrl: reader.result }] };
+          }
+          return c;
+        });
+        setCategories(updatedCategories);
+        setNewFact({ text: '', imageFile: null });
+        setIsAddingFact(false);
+      };
+
+      if (newFact.imageFile) {
+        reader.readAsDataURL(newFact.imageFile);
+      } else {
+        handleAddFactWithoutImage();
+      }
     }
+  };
+
+  const handleAddFactWithoutImage = () => {
+    const updatedCategories = categories.map(c => {
+      if (c.id === parseInt(categoryId)) {
+        return { ...c, facts: [...c.facts, { id: Date.now(), text: newFact.text, imageUrl: '' }] };
+      }
+      return c;
+    });
+    setCategories(updatedCategories);
+    setNewFact({ text: '', imageFile: null });
+    setIsAddingFact(false);
+  };
+
+  const handleImageChange = (e) => {
+    setNewFact({ ...newFact, imageFile: e.target.files[0] });
   };
 
   const handleEditFact = (factId, updatedFact) => {
@@ -249,11 +275,10 @@ const CategoryPage = () => {
                   autoFocus
                 />
                 <input
-                  type="text"
-                  value={editingFact.imageUrl}
-                  onChange={(e) => setEditingFact({ ...editingFact, imageUrl: e.target.value })}
-                  className="w-full p-2 border rounded mb-2"
-                  placeholder="Image URL (optional)"
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageChange}
+                  className="w-full p-2 mb-2 border rounded"
                 />
                 <button
                   className="w-full bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
@@ -295,10 +320,9 @@ const CategoryPage = () => {
               className="w-full p-2 mb-4 border rounded"
             />
             <input
-              type="text"
-              placeholder="Image URL (optional)"
-              value={newFact.imageUrl}
-              onChange={(e) => setNewFact({ ...newFact, imageUrl: e.target.value })}
+              type="file"
+              accept="image/*"
+              onChange={handleImageChange}
               className="w-full p-2 mb-4 border rounded"
             />
             <div className="flex justify-end">
