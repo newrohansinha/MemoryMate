@@ -142,7 +142,8 @@ const MedicationsPage = () => {
 
   return (
     <div className="container mx-auto py-8 px-4">
-      <h2 className="text-3xl font-bold text-blue-700 mb-4">Medications</h2>
+  <h1 className="text-3xl font-bold text-center mb-4">Medication</h1>
+
       <p className="text-xl mb-4">Current Time: {currentTime.toLocaleTimeString()}</p>
       
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">

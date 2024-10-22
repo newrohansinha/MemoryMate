@@ -37,8 +37,8 @@ const FacesPage = () => {
 
   return (
     <div className="container">
-      <h2 className="title">People to Remember</h2>
-      
+      <h1 className="text-4xl font-bold text-center mb-4" style={{ color: '#1E3A8A' }}>People to Remember</h1>
+
       <div className="face-grid">
         {faces.length === 0 ? (
           <div className="empty-state">Nothing Yet. Click + To Add Faces</div>
@@ -88,8 +88,7 @@ const FacesPage = () => {
             />
             <input
               type="file"
-              accept="image/*"
-              capture="environment"
+              accept="image/*" // Allows both camera and gallery access
               onChange={handleImageChange}
               className="input"
             />

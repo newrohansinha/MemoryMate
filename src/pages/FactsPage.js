@@ -235,10 +235,10 @@ const CategoryPage = () => {
   if (!category) {
     return (
       <div className="container mx-auto py-8 px-4">
-        <button
-          className="mb-4 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors duration-300"
-          onClick={() => navigate('/facts')}
-        >
+    <button
+  className="mb-4 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors duration-300"
+  onClick={() => navigate('/facts')}
+>
           ← Back to Categories
         </button>
         <h2 className="text-3xl font-bold text-red-700 mb-8 text-center">Category not found</h2>

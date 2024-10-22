@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import NavBar from './components/Navbar';
 import AIChatPage from './pages/AIChatPage'; // Import the AI Chat Page
@@ -20,13 +20,34 @@ export const AuthContext = React.createContext(null);
 
 const App = () => {
   const [user, setUser] = useState(null);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  // Save the current path to localStorage whenever the location changes
+  useEffect(() => {
+    if (user) {
+      localStorage.setItem('lastVisitedRoute', location.pathname);
+    }
+  }, [location, user]);
 
   useEffect(() => {
+    // Retrieve the last visited route from localStorage
     const storedUser = localStorage.getItem('user');
+    const lastVisitedRoute = localStorage.getItem('lastVisitedRoute') || '/';
+
     if (storedUser) {
       setUser(JSON.parse(storedUser));
+
+      // If user is already logged in, redirect to the last visited route or home page
+      if (lastVisitedRoute) {
+        navigate(lastVisitedRoute);
+      } else {
+        navigate('/');
+      }
+    } else {
+      navigate('/signup'); // Redirect to signup if not logged in
     }
-  }, []);
+  }, [navigate]);
 
   const ProtectedRoute = ({ children }) => {
     if (!user) {
@@ -36,7 +57,7 @@ const App = () => {
   };
 
   return (
-    <GoogleOAuthProvider clientId="1064795131152-iv0f3ai8gv0rncaj4ou1jecurih2pqg6.apps.googleusercontent.com"> {/* Replace with your actual Client ID */}
+    <GoogleOAuthProvider clientId="YOUR_GOOGLE_OAUTH_CLIENT_ID"> {/* Replace with your actual Client ID */}
       <AuthContext.Provider value={{ user, setUser }}>
         <div className="min-h-screen bg-gray-100">
           {user && <NavBar />} {/* Show NavBar only if user is logged in */}

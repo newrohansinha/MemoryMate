@@ -136,7 +136,7 @@ const AIChatPage = () => {
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-4xl">
-      <h1 className="text-3xl font-bold text-center mb-4">AI Chatbot</h1>
+      <h1 className="text-3xl font-bold text-center mb-4 blue-900">AI Chatbot</h1>
       
       <div className="chat-container rounded-lg shadow-md p-4 bg-white min-h-[400px] max-h-[600px] overflow-y-auto mb-4">
         {chatHistory.map((message, index) => (

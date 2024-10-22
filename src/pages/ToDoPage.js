@@ -166,7 +166,7 @@ const ToDoPage = () => {
 
   return (
     <div className="container">
-      <h2 className="title">To-Do List</h2>
+     <h1 className="text-3xl font-bold text-center mb-4 pb-4">To-Do List</h1>
       
       <div className="task-grid">
         {tasks.length === 0 ? (
