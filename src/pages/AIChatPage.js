@@ -66,7 +66,7 @@ const AIChatPage = () => {
 
     ${facesString}
 
-    Answer the question using the information provided above.
+    Answer the question using the information provided above. If and only if the question has absolutely nothing to do with the data and facts, you can just answer the question as you would normally, but keep it very short. Always speak in second person, adress the user as you.
     `;
 
     return combinedData;

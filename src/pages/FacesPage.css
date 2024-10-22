@@ -1,3 +1,4 @@
+/* First, define base styles */
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -17,20 +18,26 @@
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 20px;
   position: relative;
+  min-height: 300px;
 }
 
+/* More specific selector for empty state */
 .empty-state {
   position: absolute;
-  top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  top: 110% !important; /* Slightly above center to account for visual balance */
+  transform: translate(-50%, -50%)!important;
   text-align: center;
   color: #9CA3AF;
-  font-size: 2rem;
-  font-weight: bold;
-  width: 100%;
+  font-size: 1.25rem !important;
+  font-weight: 700 !important;
+  width: 90%;
+  max-width: 300px;
+  padding: 0 20px;
+  line-height: 1.5;
 }
 
+/* Rest of the styles remain the same */
 .face-card {
   background-color: white;
   border-radius: 8px;
@@ -97,10 +104,10 @@
   cursor: pointer;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: background-color 0.2s ease-in-out;
-
-  display: flex; /* Use Flexbox */
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
 }
 
 .add-button:hover {
@@ -118,6 +125,7 @@
   justify-content: center;
   align-items: center;
   padding: 20px;
+  z-index: 20;
 }
 
 .modal {
@@ -176,6 +184,7 @@
 @media (max-width: 640px) {
   .face-grid {
     grid-template-columns: 1fr;
+    min-height: 200px;
   }
   
   .face-card {
@@ -185,6 +194,13 @@
   .add-button {
     bottom: 1rem;
     right: 1rem;
+  }
+
+  /* More specific mobile styles for empty state */
+  .face-grid .empty-state {
+    font-size: 1.125rem !important;
+    width: 80%;
+    padding: 0 15px;
   }
 }
 
