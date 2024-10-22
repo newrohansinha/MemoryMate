@@ -148,9 +148,26 @@ const MedicationsPage = () => {
       
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {medications.length === 0 ? (
-          <div className="col-span-full text-center text-gray-500 text-lg">
-            Nothing Yet. Click + To Add Medications
-          </div>
+       <div
+       className="col-span-full text-center text-gray-500 text-lg"
+       style={{
+         position: 'absolute',
+         left: '50%',
+         top: '20%',  // Increased the top padding
+         transform: 'translateX(-50%)',  // Only translate on the X-axis
+         textAlign: 'center',
+         color: '#9CA3AF',
+         fontSize: '1.25rem',
+         fontWeight: '700',
+         width: '90%',
+         maxWidth: '300px',
+         padding: '0 20px',
+         lineHeight: '1.5',
+       }}
+     >
+       Nothing Yet. Click + To Add Medications
+     </div>
+     
         ) : (
           medications.map((med) => (
             <div key={med.id} className="bg-white rounded-lg shadow-md p-4 relative">
@@ -179,7 +196,7 @@ const MedicationsPage = () => {
 
       {!isAdding && (
         <button
-          className="fixed bottom-8 right-8 w-16 h-16 bg-blue-500 text-white rounded-full text-3xl shadow-lg hover:bg-blue-600 focus:outline-none"
+          className="fixed bottom-8 right-8 w-16 h-16 bg-blue-900 text-white rounded-full text-3xl shadow-lg hover:bg-blue-600 focus:outline-none"
           onClick={() => setIsAdding(true)}
         >
           +
@@ -215,7 +232,7 @@ const MedicationsPage = () => {
                 {daysOfWeek.map(day => (
                   <button
                     key={day}
-                    className={`px-2 py-1 rounded-full text-sm w-full h-10 ${newMed.days.includes(day) ? 'bg-blue-500 text-white' : 'bg-gray-300'}`}
+                    className={`px-2 py-1 rounded-full text-sm w-full h-10 ${newMed.days.includes(day) ? 'bg-blue-900 text-white' : 'bg-gray-300'}`}
                     onClick={() => handleDaySelect(day)}
                   >
                     {day}
@@ -237,7 +254,7 @@ const MedicationsPage = () => {
                 Cancel
               </button>
               <button
-                className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                className="px-4 py-2 bg-blue-900 text-white rounded hover:bg-blue-600"
                 onClick={handleAddMed}
               >
                 Add Medication

@@ -75,7 +75,7 @@ const FactsPage = () => {
 
   return (
     <div className="container mx-auto py-8 px-4">
-      <h2 className="text-3xl font-bold text-blue-700 mb-8 text-center">Fact Categories</h2>
+      <h2 className="text-3xl font-bold text-blue-900 mb-8 text-center">Fact Categories</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {categories.map((category) => (
           <div
@@ -102,7 +102,7 @@ const FactsPage = () => {
             )}
             <p className="text-gray-600">{category.facts.length} facts</p>
             <button
-              className="mt-4 w-full bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+              className="mt-4 w-full bg-blue-900 text-white px-4 py-2 rounded-md hover:bg-blue-600"
               onClick={() => navigate(`/category/${category.id}`)}
             >
               View Facts
@@ -113,7 +113,7 @@ const FactsPage = () => {
 
       {!isAddingCategory && (
         <button
-          className="fixed bottom-8 right-8 w-16 h-16 bg-blue-500 text-white rounded-full text-3xl shadow-lg hover:bg-blue-600 focus:outline-none"
+          className="fixed bottom-8 right-8 w-16 h-16 bg-blue-900 text-white rounded-full text-3xl shadow-lg hover:bg-blue-900 focus:outline-none"
           onClick={() => setIsAddingCategory(true)}
         >
           +
@@ -139,7 +139,7 @@ const FactsPage = () => {
                 Cancel
               </button>
               <button
-                className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                className="px-4 py-2 bg-blue-900 text-white rounded hover:bg-blue-600"
                 onClick={handleAddCategory}
               >
                 Add Category
@@ -236,12 +236,12 @@ const CategoryPage = () => {
     return (
       <div className="container mx-auto py-8 px-4">
     <button
-  className="mb-4 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors duration-300"
+  className="mb-4 bg-blue-900 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors duration-300"
   onClick={() => navigate('/facts')}
 >
           ← Back to Categories
         </button>
-        <h2 className="text-3xl font-bold text-red-700 mb-8 text-center">Category not found</h2>
+        <h2 className="text-3xl font-bold text-red-900 mb-8 text-center">Category not found</h2>
         <p className="text-center">The category you're looking for doesn't exist.</p>
       </div>
     );
@@ -250,12 +250,12 @@ const CategoryPage = () => {
   return (
     <div className="container mx-auto py-8 px-4">
       <button
-        className="mb-4 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors duration-300"
+        className="mb-4 bg-blue-900 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors duration-300"
         onClick={() => navigate('/facts')}
       >
         ← Back to Categories
       </button>
-      <h2 className="text-3xl font-bold text-blue-700 mb-8 text-center">{category.name}</h2>
+      <h2 className="text-3xl font-bold text-blue-00 mb-8 text-center">{category.name}</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {category.facts.map((fact) => (
           <div key={fact.id} className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 relative">
@@ -274,12 +274,14 @@ const CategoryPage = () => {
                   className="w-full p-2 border rounded mb-2"
                   autoFocus
                 />
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={handleImageChange}
-                  className="w-full p-2 mb-2 border rounded"
-                />
+         <input
+  type="file"
+  accept="image/*"
+  capture="environment"  // Enables camera or gallery selection
+  onChange={handleImageChange}
+  className="w-full p-2 mb-4 border rounded"
+/>
+
                 <button
                   className="w-full bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
                   onClick={() => handleEditFact(fact.id, editingFact)}
@@ -319,12 +321,14 @@ const CategoryPage = () => {
               onChange={(e) => setNewFact({ ...newFact, text: e.target.value })}
               className="w-full p-2 mb-4 border rounded"
             />
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleImageChange}
-              className="w-full p-2 mb-4 border rounded"
-            />
+        <input
+  type="file"
+  accept="image/*"
+  capture="environment"  // Enables camera or gallery selection
+  onChange={handleImageChange}
+  className="w-full p-2 mb-4 border rounded"
+/>
+
             <div className="flex justify-end">
               <button
                 className="px-4 py-2 bg-gray-300 rounded mr-2 hover:bg-gray-400"

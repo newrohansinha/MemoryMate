@@ -9,16 +9,22 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-blue-500 py-2 px-4 flex justify-between items-center relative">
+    <nav className="bg-blue-900 py-2 px-4 flex justify-between items-center relative">
       {/* Placeholder to keep layout balanced */}
       <div className="w-6"></div>
 
       {/* Home Button */}
       <div className="absolute inset-x-0 flex justify-center">
-        <Link to="/" className="text-white">
-          <img src={`${process.env.PUBLIC_URL}/home.png`} alt="Home" className="w-6 h-6" />
-        </Link>
-      </div>
+  <Link to="/" className="text-white">
+    <img 
+      src={`${process.env.PUBLIC_URL}/home.png`} 
+      alt="Home" 
+      className="w-6 h-6 bg-transparent"
+      style={{ backgroundColor: 'transparent' }} // Inline style to ensure transparency
+    />
+  </Link>
+</div>
+
 
       {/* Dropdown Menu */}
       <div className="relative">

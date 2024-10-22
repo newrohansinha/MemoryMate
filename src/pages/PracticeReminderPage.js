@@ -110,7 +110,7 @@ const PracticeReminderPage = () => {
 
   return (
     <div className="container mx-auto py-8 px-4">
-      <h2 className="text-3xl font-bold text-blue-700 mb-4">Practice Reminders</h2>
+      <h2 className="text-3xl font-bold text-blue-900 mb-4">Practice Reminders</h2>
       <p className="text-xl mb-4">Current Time: {currentTime.toLocaleTimeString()}</p>
       
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -136,7 +136,7 @@ const PracticeReminderPage = () => {
 
       {!isAdding && (
         <button
-          className="fixed bottom-8 right-8 w-16 h-16 bg-blue-500 text-white rounded-full text-3xl shadow-lg hover:bg-blue-600 focus:outline-none"
+          className="fixed bottom-8 right-8 w-16 h-16 bg-blue-900 text-white rounded-full text-3xl shadow-lg hover:bg-blue-600 focus:outline-none"
           onClick={() => setIsAdding(true)}
         >
           +
@@ -158,7 +158,7 @@ const PracticeReminderPage = () => {
                 <button
                   key={day}
                   className={`px-4 py-2 flex-1 text-center rounded-md ${
-                    newReminder.days.includes(day) ? 'bg-blue-500 text-white' : 'bg-gray-300'
+                    newReminder.days.includes(day) ? 'bg-blue-900 text-white' : 'bg-gray-300'
                   }`}
                   onClick={() => handleDaySelect(day)}
                 >
@@ -167,7 +167,7 @@ const PracticeReminderPage = () => {
               ))}
               <button
                 className={`px-4 py-2 flex-1 text-center rounded-md ${
-                  newReminder.days.includes("Every day") ? 'bg-blue-500 text-white' : 'bg-gray-300'
+                  newReminder.days.includes("Every day") ? 'bg-blue-900 text-white' : 'bg-gray-300'
                 }`}
                 onClick={handleEveryDaySelect}
               >
@@ -182,7 +182,7 @@ const PracticeReminderPage = () => {
                 Cancel
               </button>
               <button
-                className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                className="px-4 py-2 bg-blue-900 text-white rounded hover:bg-blue-600"
                 onClick={handleAddReminder}
               >
                 Add Reminder

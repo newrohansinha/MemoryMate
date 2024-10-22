@@ -19,6 +19,21 @@ const AIChatPage = () => {
     }
   }, []);
 
+  // Load chat history from localStorage when component mounts
+  useEffect(() => {
+    const storedHistory = localStorage.getItem('chatHistory');
+    if (storedHistory) {
+      setChatHistory(JSON.parse(storedHistory));
+    }
+  }, []);
+
+  // Save chat history to localStorage whenever it updates
+  useEffect(() => {
+    if (chatHistory.length > 0) {
+      localStorage.setItem('chatHistory', JSON.stringify(chatHistory));
+    }
+  }, [chatHistory]);
+
   const handleUserInput = (e) => {
     setUserInput(e.target.value);
   };
@@ -66,7 +81,7 @@ const AIChatPage = () => {
 
     ${facesString}
 
-    Answer the question using the information provided above. If and only if the question has absolutely nothing to do with the data and facts, you can just answer the question as you would normally, but keep it very short. Always speak in second person, adress the user as you.
+    Answer the question using the information provided above. If and only if the question has absolutely nothing to do with the data and facts, you can just answer the question as you would normally, but keep it very short. Always speak in second person, address the user as you.
     `;
 
     return combinedData;
@@ -124,6 +139,7 @@ const AIChatPage = () => {
 
   const clearChat = () => {
     setChatHistory([]);
+    localStorage.removeItem('chatHistory'); // Clear chat history from localStorage as well
   };
 
   // Auto-scroll to bottom when new messages arrive
@@ -174,7 +190,7 @@ const AIChatPage = () => {
           onKeyPress={(e) => e.key === 'Enter' && !isLoading && userInput.trim() && sendMessage()}
         />
         <button
-          className="px-6 py-2 rounded-lg bg-blue-500 text-white hover:bg-blue-600 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="px-6 py-2 rounded-lg bg-blue-900 text-white hover:bg-blue-600 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           onClick={sendMessage}
           disabled={isLoading || !userInput.trim() || !model}
         >

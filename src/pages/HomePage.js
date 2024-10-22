@@ -19,7 +19,7 @@ const HomePage = () => {
 
   return (
     <div className="container">
-      <h1 className="title">Hi, {user?.name?.split(' ')[0] || 'User'}</h1>
+      <h1 className="title">Hi {user?.name?.split(' ')[0] || 'User'}! </h1>
 
       <p className="subtitle">Welcome back! Click on of the options bellow to ehance your Memory!</p>
 

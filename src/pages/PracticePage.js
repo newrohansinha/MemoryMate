@@ -86,7 +86,7 @@ const SetupPage = ({ onSubmit }) => {
 
   return (
     <div className="container mx-auto py-8 px-4 max-w-md">
-      <h2 className="text-3xl font-bold text-blue-700 mb-8 text-center">Customize Your Quiz</h2>
+      <h2 className="text-3xl font-bold text-blue-900 mb-8 text-center">Customize Your Quiz</h2>
       <div className="bg-white p-8 rounded-lg shadow-md">
         <div className="mb-6">
           <label className="block text-xl font-bold mb-2">Quiz Type:</label>
@@ -143,7 +143,7 @@ const SetupPage = ({ onSubmit }) => {
 
         <button
           onClick={handleSubmit}
-          className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300"
+          className="w-full bg-blue-900 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300"
         >
           Start Quiz
         </button>
@@ -295,7 +295,7 @@ const PracticePage = ({ quizType, numQuestions, onNewQuiz }) => {
     return (
       <div className="fixed inset-0 flex items-center justify-center bg-gray-100">
         <div className="text-center bg-white p-8 rounded-lg shadow-md">
-          <h2 className="text-4xl font-bold text-blue-700 mb-6">Quiz Completed!</h2>
+          <h2 className="text-4xl font-bold text-blue-900 mb-6">Quiz Completed!</h2>
           <p className="text-3xl font-bold text-blue-600 mb-8">Your Score: {score} / {numQuestions}</p>
           <button
             onClick={onNewQuiz}
