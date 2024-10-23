@@ -142,32 +142,31 @@ const MedicationsPage = () => {
 
   return (
     <div className="container mx-auto py-8 px-4">
-  <h1 className="text-3xl font-bold text-center mb-4">Medication</h1>
+      <h1 className="text-3xl font-bold text-center mb-4">Medication</h1>
 
       <p className="text-xl mb-4">Current Time: {currentTime.toLocaleTimeString()}</p>
       
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {medications.length === 0 ? (
-       <div
-       className="col-span-full text-center text-gray-500 text-lg"
-       style={{
-         position: 'absolute',
-         left: '50%',
-         top: '20%',  // Increased the top padding
-         transform: 'translateX(-50%)',  // Only translate on the X-axis
-         textAlign: 'center',
-         color: '#9CA3AF',
-         fontSize: '1.25rem',
-         fontWeight: '700',
-         width: '90%',
-         maxWidth: '300px',
-         padding: '0 20px',
-         lineHeight: '1.5',
-       }}
-     >
-       Nothing Yet. Click + To Add Medications
-     </div>
-     
+          <div
+            className="col-span-full text-center text-gray-500 text-lg"
+            style={{
+              position: 'absolute',
+              left: '50%',
+              top: '20%',  // Increased the top padding
+              transform: 'translateX(-50%)',  // Only translate on the X-axis
+              textAlign: 'center',
+              color: '#9CA3AF',
+              fontSize: '1.25rem',
+              fontWeight: '700',
+              width: '90%',
+              maxWidth: '300px',
+              padding: '0 20px',
+              lineHeight: '1.5',
+            }}
+          >
+            Nothing Yet. Click + To Add Medications
+          </div>
         ) : (
           medications.map((med) => (
             <div key={med.id} className="bg-white rounded-lg shadow-md p-4 relative">
@@ -221,12 +220,17 @@ const MedicationsPage = () => {
               onChange={(e) => setNewMed({ ...newMed, dose: e.target.value })}
               className="w-full p-2 mb-4 border rounded"
             />
-            <input
-              type="time"
-              value={newMed.time}
-              onChange={(e) => setNewMed({ ...newMed, time: e.target.value })}
-              className="w-full p-2 mb-4 border rounded"
-            />
+            <div className="mb-4">
+              <label className="block text-gray-700 text-sm font-bold mb-2">
+                Time:
+                <input
+                  type="time"
+                  value={newMed.time}
+                  onChange={(e) => setNewMed({ ...newMed, time: e.target.value })}
+                  className="w-full p-2 border rounded"
+                />
+              </label>
+            </div>
             <div className="mb-4">
               <div className="grid grid-cols-4 gap-2 mb-2">
                 {daysOfWeek.map(day => (

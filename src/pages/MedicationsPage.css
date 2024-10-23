@@ -161,56 +161,71 @@
   }
   
   /* Modal background and form styling */
-  .fixed {
-    position: fixed;
+  /* Modal background and form styling */
+.fixed {
+  position: fixed;
+}
+
+.inset-0 {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.bg-black {
+  background-color: black;
+}
+
+.bg-opacity-50 {
+  opacity: 0.5;
+}
+
+.flex {
+  display: flex;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.bg-white {
+  background-color: white;
+}
+
+.rounded-lg {
+  border-radius: 8px;
+}
+
+.p-6 {
+  padding: 24px;
+}
+
+.max-w-md {
+  max-width: 28rem; /* 448px */
+}
+
+.w-full {
+  width: 100%;
+}
+
+/* Allow scrolling within the modal if content overflows */
+.modal-content {
+  max-height: 80vh; /* Modal can take up to 80% of the viewport height */
+  overflow-y: auto; /* Enable vertical scrolling if content exceeds max height */
+  padding: 24px;
+}
+
+@media (max-height: 600px) {
+  .modal-content {
+    max-height: 60vh; /* Smaller screen heights will shrink the modal */
   }
-  
-  .inset-0 {
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-  }
-  
-  .bg-black {
-    background-color: black;
-  }
-  
-  .bg-opacity-50 {
-    opacity: 0.5;
-  }
-  
-  .flex {
-    display: flex;
-  }
-  
-  .items-center {
-    align-items: center;
-  }
-  
-  .justify-center {
-    justify-content: center;
-  }
-  
-  .bg-white {
-    background-color: white;
-  }
-  
-  .rounded-lg {
-    border-radius: 8px;
-  }
-  
-  .p-6 {
-    padding: 24px;
-  }
-  
-  .max-w-md {
-    max-width: 28rem; /* 448px */
-  }
-  
-  .w-full {
-    width: 100%;
-  }
+}
+
   
   /* Input field styling */
   input {

@@ -21,12 +21,11 @@
   min-height: 300px;
 }
 
-/* More specific selector for empty state */
 .empty-state {
   position: absolute;
   left: 50%;
-  top: 10% !important; /* Slightly above center to account for visual balance */
-  transform: translate(-50%, -50%)!important;
+  top: 10% !important;
+  transform: translate(-50%, -50%) !important;
   text-align: center;
   color: #9CA3AF;
   font-size: 1.25rem !important;
@@ -37,7 +36,6 @@
   line-height: 1.5;
 }
 
-/* Rest of the styles remain the same */
 .face-card {
   background-color: white;
   border-radius: 8px;
@@ -108,7 +106,7 @@
   justify-content: center;
   align-items: center;
   z-index: 10;
-  line-height: 1; /* Ensures no additional space inside the button */
+  line-height: 1;
 }
 
 .add-button:hover {
@@ -137,10 +135,23 @@
   max-width: 400px;
 }
 
+/* Modal responsive styles */
+@media (max-width: 640px) {
+  .modal {
+    padding: 1.5rem;
+    max-width: 85%; /* Reduced from 90% to create more space */
+    margin: 0 auto; /* Center the modal */
+  }
+  
+  .modal-overlay {
+    padding: 24px; /* Increased padding for more space around modal */
+  }
+}
+
 .modal-title {
   font-size: 1.5rem;
   margin-bottom: 1rem;
-  font-weight:bold;
+  font-weight: bold;
 }
 
 .input {
@@ -183,7 +194,24 @@
   background-color: #d1d5db;
 }
 
-@media (max-width: 640px) {
+/* Additional Media Query for iPhones and smaller screens */
+@media (max-width: 480px) {
+  .modal {
+    padding: 1.5rem;
+    max-width: 85%; /* Reduced from calc(100% - 40px) for more space */
+    margin: 0 auto; /* Center the modal */
+  }
+  
+  .modal-overlay {
+    padding: 20px 24px; /* Increased horizontal padding */
+  }
+  
+  .empty-state {
+    font-size: 1.125rem !important;
+    width: 80%;
+    padding: 0 15px;
+  }
+
   .face-grid {
     grid-template-columns: 1fr;
     min-height: 200px;
@@ -196,19 +224,5 @@
   .add-button {
     bottom: 1rem;
     right: 1rem;
-  }
-
-  /* More specific mobile styles for empty state */
-  .face-grid .empty-state {
-    font-size: 1.125rem !important;
-    width: 80%;
-    padding: 0 15px;
-  }
-}
-
-@media (max-width: 480px) {
-  .modal {
-    padding: 1.5rem;
-    max-width: calc(100% - 40px);
   }
 }

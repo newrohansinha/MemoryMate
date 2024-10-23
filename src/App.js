@@ -57,7 +57,7 @@ const App = () => {
   };
 
   return (
-    <GoogleOAuthProvider clientId="YOUR_GOOGLE_OAUTH_CLIENT_ID"> {/* Replace with your actual Client ID */}
+    <GoogleOAuthProvider clientId="1064795131152-iv0f3ai8gv0rncaj4ou1jecurih2pqg6.apps.googleusercontent.com"> {/* Replace with your actual Client ID */}
       <AuthContext.Provider value={{ user, setUser }}>
         <div className="min-h-screen bg-gray-100">
           {user && <NavBar />} {/* Show NavBar only if user is logged in */}

@@ -97,6 +97,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 20px; /* Add padding to ensure space between the popup and screen edges */
 }
 
 .modal {
@@ -105,6 +106,15 @@
   padding: 20px;
   width: 100%;
   max-width: 400px;
+  margin: 0 20px; /* Add margin on smaller screens */
+  box-sizing: border-box; /* Ensure padding is accounted for in width */
+}
+
+@media (max-width: 600px) { /* For iPhone screens */
+  .modal {
+    margin: 0 15px; /* Add extra space on the sides for smaller screens */
+    max-width: 90%; /* Ensure the modal is never too wide */
+  }
 }
 
 .modal-title {
@@ -152,6 +162,7 @@
 .modal-button.add:hover {
   background-color: #1E3A8A;
 }
+
 
 .back-button {
   display: inline-block;
