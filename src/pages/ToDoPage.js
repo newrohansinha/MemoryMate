@@ -4,7 +4,7 @@ import emailjs from 'emailjs-com';
 import './ToDoPage.css'; // Make sure this CSS file exists and is in the correct location
 
 // Initialize EmailJS with your user ID
-emailjs.init("iRjMijc_VqEvklQy3"); // Replace with your actual EmailJS user ID
+emailjs.init("ug_UtcV6i-Y0OXlRU"); // Replace with your actual EmailJS user ID
 
 const ToDoPage = () => {
   const { user } = useContext(AuthContext);
@@ -120,7 +120,7 @@ const ToDoPage = () => {
       to_email: user.email,
     };
   
-    emailjs.send('service_qqglm7d', 'template_bfoc4oh', emailParams)
+    emailjs.send('service_82rdlgk', 'template_s89s56k', emailParams)
       .then(response => {
         console.log('Email sent successfully:', response.status, response.text);
       })
