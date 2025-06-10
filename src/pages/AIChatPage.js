@@ -12,7 +12,8 @@ const AIChatPage = () => {
   useEffect(() => {
     try {
       const genAI = new GoogleGenerativeAI("AIzaSyAwz3BUSqb9_tS5N9aeJy05Uhc6gLq71UI");
-      const modelInstance = genAI.getGenerativeModel({ model: "gemini-pro" });
+      const modelInstance = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+
       setModel(modelInstance);
     } catch (error) {
       console.error("Error initializing API:", error);
