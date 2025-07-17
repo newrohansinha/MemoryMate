@@ -11,7 +11,7 @@ const AIChatPage = () => {
   // Initialize Gemini API
   useEffect(() => {
     try {
-      const genAI = new GoogleGenerativeAI("AIzaSyAwz3BUSqb9_tS5N9aeJy05Uhc6gLq71UI");
+      const genAI = new GoogleGenerativeAI(HIDDEN);
       const modelInstance = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
       setModel(modelInstance);
