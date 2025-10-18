@@ -294,7 +294,7 @@ Suggested additions
 
 ---
 
-## 🛠️ Roadmap
+##  Roadmap
 
 - Replace AI stub with a backend route to an LLM provider
 - Migrate reminders to a server queue such as BullMQ and Redis with per‑user schedules
